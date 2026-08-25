@@ -1,0 +1,31 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+config.php
+
+# User-uploaded/generated files
+uploads/*
+!uploads/.gitkeep
+
+# Logs, cache and temporary files
+*.log
+*.tmp
+*.temp
+cache/
+tmp/
+temp/
+
+# IDE/editor files
+.idea/
+.vscode/*.code-workspace
+*.swp
+*.swo
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# PHP tooling
+vendor/
