@@ -31,10 +31,19 @@ if (isset($_GET['download'])) {
     }
 }
 
-// Get all files in folder
-$stmt = $pdo->prepare("SELECT * FROM files WHERE folder_id = ? ORDER BY created_at DESC");
+// Get all files in folder. Sort titles naturally so UNIT 2 comes before UNIT 10.
+$stmt = $pdo->prepare("SELECT * FROM files WHERE folder_id = ?");
 $stmt->execute([$folder_id]);
 $files = $stmt->fetchAll();
+
+usort($files, static function (array $a, array $b): int {
+    $titleOrder = strnatcasecmp($a['title'], $b['title']);
+
+    // Keep the order deterministic when two notes have the same title.
+    return $titleOrder !== 0
+        ? $titleOrder
+        : ((int) $a['id'] <=> (int) $b['id']);
+});
 
 $total   = count($files);
 $locked  = count(array_filter($files, fn($f) => $f['is_locked']));
