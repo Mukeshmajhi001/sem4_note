@@ -26,7 +26,7 @@ $folders = $pdo->query("
     <nav class="navbar">
         <div class="navbar-brand">📚 Mks-75<span>Note</span></div>
         <div class="navbar-right">
-            <a href="admin/login.php" class="nav-link-btn">⚙️ Admin</a>
+            <a href="admin/login" class="nav-link-btn">⚙️ Admin</a>
             <button class="neu-btn theme-toggle" id="themeToggle" title="Toggle Theme">🌙</button>
         </div>
     </nav>
@@ -52,7 +52,7 @@ $folders = $pdo->query("
         <?php else: ?>
             <div class="folder-grid fade-in fade-in-2">
                 <?php foreach ($folders as $folder): ?>
-                    <a href="folder.php?id=<?= $folder['id'] ?>" style="text-decoration:none">
+                    <a href="folder?id=<?= $folder['id'] ?>" style="text-decoration:none">
                         <div class="neu-card folder-card" style="--folder-color:<?= e($folder['color']) ?>">
                             <span class="folder-icon"><?= e($folder['icon']) ?></span>
                             <span class="folder-name"><?= e($folder['name']) ?></span>

@@ -8,22 +8,22 @@ $current = basename($_SERVER['PHP_SELF']);
         <span style="font-size:0.7rem;font-weight:400;color:var(--text-muted)">Admin Panel</span>
     </div>
 
-    <a href="index.php"   class="sidebar-link <?= $current==='index.php'   ? 'active':'' ?>">
+    <a href="index"   class="sidebar-link <?= $current==='index.php'   ? 'active':'' ?>">
         <span class="icon">📊</span> Dashboard
     </a>
-    <a href="folders.php" class="sidebar-link <?= $current==='folders.php' ? 'active':'' ?>">
+    <a href="folders" class="sidebar-link <?= $current==='folders.php' ? 'active':'' ?>">
         <span class="icon">📂</span> Subjects / Folders
     </a>
-    <a href="files.php"   class="sidebar-link <?= $current==='files.php'   ? 'active':'' ?>">
+    <a href="files"   class="sidebar-link <?= $current==='files.php'   ? 'active':'' ?>">
         <span class="icon">📄</span> Notes / Files
     </a>
 
     <div style="flex:1"></div>
 
-    <a href="../index.php" target="_blank" class="sidebar-link">
+    <a href="../" target="_blank" class="sidebar-link">
         <span class="icon">🌐</span> View Website
     </a>
-    <a href="logout.php" class="sidebar-link" style="color:var(--danger)">
+    <a href="logout" class="sidebar-link" style="color:var(--danger)">
         <span class="icon">🚪</span> Logout
     </a>
 

@@ -1,6 +1,24 @@
 # .htaccess — Root
 Options -Indexes
 
+# Clean URLs: /notes-website/folder instead of /notes-website/folder.php
+DirectoryIndex index.php
+RewriteEngine On
+
+# Redirect direct .php visits to the extensionless URL. Query strings are kept.
+RewriteCond %{THE_REQUEST} \s/+[^?\s]*index\.php(?:[?\s]) [NC]
+RewriteCond %{REQUEST_URI} ^(.*/)index\.php$ [NC]
+RewriteRule ^index\.php$ %1 [R=301,L,NE]
+RewriteCond %{THE_REQUEST} \s/+[^?\s]+\.php(?:[?\s]) [NC]
+RewriteCond %{REQUEST_URI} ^(.*/)([^/]+)\.php$ [NC]
+RewriteRule ^(.+)\.php$ %1%2 [R=301,L,NE]
+
+# Internally load the matching PHP file for a clean URL.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L,QSA]
+
 # Protect config file from direct access
 <Files "config.php">
     Order allow,deny

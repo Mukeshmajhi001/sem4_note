@@ -2,7 +2,7 @@
 // admin/login.php
 require_once '../config.php';
 
-if (isAdminLoggedIn()) { header('Location: index.php'); exit; }
+if (isAdminLoggedIn()) { header('Location: index'); exit; }
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($admin && password_verify($password, $admin['password'])) {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_username']  = $admin['username'];
-            header('Location: index.php'); exit;
+            header('Location: index'); exit;
         } else {
             $error = 'Invalid username or password.';
         }
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <div style="text-align:center;margin-top:20px">
-            <a href="../index.php" style="color:var(--text-muted);font-size:0.9rem">
+            <a href="../" style="color:var(--text-muted);font-size:0.9rem">
                 ← Back to Website
             </a>
         </div>

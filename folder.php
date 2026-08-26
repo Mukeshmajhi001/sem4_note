@@ -3,13 +3,13 @@
 require_once 'config.php';
 $is_locked = false;
 $folder_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-if (!$folder_id) { header('Location: index.php'); exit; }
+if (!$folder_id) { header('Location: ./'); exit; }
 
 // Get folder
 $stmt = $pdo->prepare("SELECT * FROM folders WHERE id = ?");
 $stmt->execute([$folder_id]);
 $folder = $stmt->fetch();
-if (!$folder) { header('Location: index.php'); exit; }
+if (!$folder) { header('Location: ./'); exit; }
 
 // Handle download (increment counter + serve file)
 if (isset($_GET['download'])) {
@@ -53,7 +53,7 @@ $unlocked = $total - $locked;
 <nav class="navbar">
     <div class="navbar-brand">📚 Mks-75<span>Note</span></div>
     <div class="navbar-right">
-        <a href="admin/login.php" class="nav-link-btn">⚙️ Admin</a>
+        <a href="admin/login" class="nav-link-btn">⚙️ Admin</a>
         <button class="neu-btn theme-toggle" id="themeToggle">🌙</button>
     </div>
 </nav>
@@ -62,7 +62,7 @@ $unlocked = $total - $locked;
 
     <!-- Breadcrumb -->
     <div class="breadcrumb fade-in">
-        <a href="index.php">🏠 Home</a>
+        <a href="./">🏠 Home</a>
         <span>›</span>
         <span><?= e($folder['name']) ?></span>
     </div>
@@ -109,7 +109,7 @@ $unlocked = $total - $locked;
         <div class="icon">📄</div>
         <h3>No Notes Yet</h3>
         <p>Upload notes from the admin panel.</p>
-        <a href="index.php" class="neu-btn" style="padding:10px 22px;margin-top:20px">← Back to Subjects</a>
+        <a href="./" class="neu-btn" style="padding:10px 22px;margin-top:20px">← Back to Subjects</a>
     </div>
     <?php else: ?>
     <div class="files-grid">
@@ -146,7 +146,7 @@ $unlocked = $total - $locked;
                 <?php if ($file['description']): ?>
                 <div class="file-desc-wrap">
                     <p class="file-desc"><?= e($file['description']) ?></p>
-                    <a class="description-toggle" href="description.php?id=<?= (int)$file['id'] ?>">See more</a>
+                    <a class="description-toggle" href="description?id=<?= (int)$file['id'] ?>">See more</a>
                 </div>
                 <?php endif; ?>
 
@@ -199,7 +199,7 @@ $unlocked = $total - $locked;
                     </a>
                     <?php endif; ?>
                     <?php if ($file['file_path']): ?>
-                    <a href="folder.php?id=<?= $folder_id ?>&download=<?= $file['id'] ?>" class="btn-download">
+                    <a href="folder?id=<?= $folder_id ?>&download=<?= $file['id'] ?>" class="btn-download">
                         ⬇️ Download
                     </a>
                     <?php endif; ?>
@@ -212,7 +212,7 @@ $unlocked = $total - $locked;
     </div>
 
     <div style="padding-bottom:40px">
-        <a href="index.php" class="neu-btn" style="padding:10px 22px">← Back to Subjects</a>
+        <a href="./" class="neu-btn" style="padding:10px 22px">← Back to Subjects</a>
     </div>
     <?php endif; ?>
 

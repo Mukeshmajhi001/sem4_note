@@ -158,7 +158,7 @@ $icons  = ['📁','📚','📐','⚛️','🧪','💻','🧬','📖','🎓','�
                         <?= $editFolder ? '💾 Save Changes' : '✅ Create Folder' ?>
                     </button>
                     <?php if ($editFolder): ?>
-                    <a href="folders.php" class="neu-btn" style="padding:13px 24px;font-weight:700">
+                    <a href="folders" class="neu-btn" style="padding:13px 24px;font-weight:700">
                         ✕ Cancel
                     </a>
                     <?php endif; ?>
@@ -197,7 +197,7 @@ $icons  = ['📁','📚','📐','⚛️','🧪','💻','🧬','📖','🎓','�
                     <td data-label="Notes"><span class="meta-badge"><?= $f['file_count'] ?> file(s)</span></td>
                     <td data-label="Actions">
                         <div class="table-actions">
-                            <a href="folders.php?edit=<?= $f['id'] ?>" class="btn-edit">✏️ Edit</a>
+                            <a href="folders?edit=<?= $f['id'] ?>" class="btn-edit">✏️ Edit</a>
                             <form method="POST" style="display:inline"
                                 onsubmit="return confirm('Delete \"<?= e(addslashes($f['name'])) ?>\" and ALL its notes? This cannot be undone.')">
                                 <input type="hidden" name="action" value="delete">
