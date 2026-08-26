@@ -67,7 +67,7 @@ $recent = $pdo->query("
 
         <!-- Quick Actions -->
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:30px">
-            <a href="folders.php" style="text-decoration:none">
+            <a href="folders" style="text-decoration:none">
                 <div class="neu-card" style="padding:20px;display:flex;align-items:center;gap:14px">
                     <span style="font-size:2rem">📂</span>
                     <div>
@@ -76,7 +76,7 @@ $recent = $pdo->query("
                     </div>
                 </div>
             </a>
-            <a href="files.php" style="text-decoration:none">
+            <a href="files" style="text-decoration:none">
                 <div class="neu-card" style="padding:20px;display:flex;align-items:center;gap:14px">
                     <span style="font-size:2rem">📤</span>
                     <div>
@@ -85,7 +85,7 @@ $recent = $pdo->query("
                     </div>
                 </div>
             </a>
-            <a href="files.php?locked=1" style="text-decoration:none">
+            <a href="files?locked=1" style="text-decoration:none">
                 <div class="neu-card" style="padding:20px;display:flex;align-items:center;gap:14px">
                     <span style="font-size:2rem">🔒</span>
                     <div>
@@ -94,7 +94,7 @@ $recent = $pdo->query("
                     </div>
                 </div>
             </a>
-            <a href="../index.php" target="_blank" style="text-decoration:none">
+            <a href="../" target="_blank" style="text-decoration:none">
                 <div class="neu-card" style="padding:20px;display:flex;align-items:center;gap:14px">
                     <span style="font-size:2rem">🌐</span>
                     <div>

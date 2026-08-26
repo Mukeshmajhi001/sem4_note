@@ -126,6 +126,10 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute($params);
 $files = $stmt->fetchAll();
+$filesByFolder = [];
+foreach ($files as $file) {
+    $filesByFolder[$file['folder_id']][] = $file;
+}
 
 $lockCount   = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=1")->fetchColumn();
 $unlockCount = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=0")->fetchColumn();
@@ -156,7 +160,7 @@ $unlockCount = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=0")->fetc
         <?php if (empty($folders)): ?>
         <div class="alert alert-error">
             ⚠️ No subject folders found.
-            <a href="folders.php" style="color:inherit;text-decoration:underline">Create a folder first</a>
+            <a href="folders" style="color:inherit;text-decoration:underline">Create a folder first</a>
             before uploading notes.
         </div>
         <?php else: ?>
@@ -276,7 +280,7 @@ $unlockCount = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=0")->fetc
                             <option value="1"  <?= $filter_locked===1 ?'selected':'' ?>>🔒 Locked</option>
                         </select>
                         <?php if ($filter_folder || $filter_locked >= 0): ?>
-                        <a href="files.php" class="neu-btn" style="padding:10px 14px;font-size:.85rem">✕ Clear</a>
+                        <a href="files" class="neu-btn" style="padding:10px 14px;font-size:.85rem">✕ Clear</a>
                         <?php endif; ?>
                     </form>
                 </div>
@@ -297,7 +301,13 @@ $unlockCount = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=0")->fetc
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($files as $f): ?>
+                <?php foreach ($filesByFolder as $folderFiles): ?>
+                <tr class="folder-group-row">
+                    <td colspan="6" style="padding:12px 16px;background:var(--input-bg);color:var(--accent);font-weight:800;border-radius:var(--radius-sm)">
+                        📂 <?= e($folderFiles[0]['folder_name']) ?> <span style="font-weight:400;color:var(--text-muted)">(<?= count($folderFiles) ?> note<?= count($folderFiles) === 1 ? '' : 's' ?>)</span>
+                    </td>
+                </tr>
+                <?php foreach ($folderFiles as $f): ?>
                 <tr>
                     <td data-label="Title" style="font-weight:700;max-width:200px">
                         <?= e($f['title']) ?>
@@ -357,6 +367,10 @@ $unlockCount = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=0")->fetc
                             </a>
                             <?php endif; ?>
 
+                            <!-- Edit -->
+                            <a href="edit?id=<?= $f['id'] ?><?= $filter_folder ? '&folder='.$filter_folder : '' ?><?= $filter_locked >= 0 ? '&locked='.$filter_locked : '' ?>"
+                               class="btn-edit">✏️ Edit</a>
+
                             <!-- Delete -->
                             <form method="POST" style="display:inline"
                                 onsubmit="return confirm('Delete \"<?= e(addslashes($f['title'])) ?>\"? This cannot be undone.')">
@@ -367,6 +381,7 @@ $unlockCount = $pdo->query("SELECT COUNT(*) FROM files WHERE is_locked=0")->fetc
                         </div>
                     </td>
                 </tr>
+                <?php endforeach; ?>
                 <?php endforeach; ?>
                 </tbody>
             </table>

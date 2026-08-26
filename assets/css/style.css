@@ -938,7 +938,8 @@ a:hover {
   transition: all var(--transition);
   user-select: none;
 }
-.type-option:checked + .type-label {
+.type-option:checked + .type-label,
+.edit-type-option:checked + .type-label {
   box-shadow: var(--neu-inset);
   color: var(--accent);
 }

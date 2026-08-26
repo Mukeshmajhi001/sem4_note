@@ -4,7 +4,7 @@ require_once 'config.php';
 
 $file_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 if (!$file_id) {
-    header('Location: index.php');
+    header('Location: ./');
     exit;
 }
 
@@ -16,7 +16,7 @@ $stmt->execute([$file_id]);
 $file = $stmt->fetch();
 
 if (!$file) {
-    header('Location: index.php');
+    header('Location: ./');
     exit;
 }
 ?>
@@ -32,16 +32,16 @@ if (!$file) {
 <nav class="navbar">
     <div class="navbar-brand">📚 Mks-75<span>Note</span></div>
     <div class="navbar-right">
-        <a href="admin/login.php" class="nav-link-btn">⚙️ Admin</a>
+        <a href="admin/login" class="nav-link-btn">⚙️ Admin</a>
         <button class="neu-btn theme-toggle" id="themeToggle">🌙</button>
     </div>
 </nav>
 
 <main class="container description-page">
     <div class="breadcrumb fade-in">
-        <a href="index.php">🏠 Home</a>
+        <a href="./">🏠 Home</a>
         <span>›</span>
-        <a href="folder.php?id=<?= (int)$file['folder_id'] ?>">
+        <a href="folder?id=<?= (int)$file['folder_id'] ?>">
             <?= e($file['folder_icon']) ?> <?= e($file['folder_name']) ?>
         </a>
         <span>›</span>
@@ -73,13 +73,13 @@ if (!$file) {
                 </a>
                 <?php endif; ?>
                 <?php if ($file['file_path']): ?>
-                <a class="btn-download" href="folder.php?id=<?= (int)$file['folder_id'] ?>&download=<?= (int)$file['id'] ?>">
+                <a class="btn-download" href="folder?id=<?= (int)$file['folder_id'] ?>&download=<?= (int)$file['id'] ?>">
                     ⬇️ Download PDF
                 </a>
                 <?php endif; ?>
             </div>
             <?php endif; ?>
-            <a href="folder.php?id=<?= (int)$file['folder_id'] ?>" class="neu-btn description-back">
+            <a href="folder?id=<?= (int)$file['folder_id'] ?>" class="neu-btn description-back">
                 ← Back to Notes
             </a>
         </div>
