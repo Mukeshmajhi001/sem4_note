@@ -44,30 +44,30 @@ $folders = $pdo->query("
         <div class="section-title fade-in fade-in-2">📂 All Subjects</div>
 
         <?php if (empty($folders)): ?>
-            <div class="empty-state fade-in">
-                <div class="icon">📂</div>
-                <h3>No Subjects Found</h3>
-                <p>Visit the admin panel to create subject folders.</p>
-            </div>
+        <div class="empty-state fade-in">
+            <div class="icon">📂</div>
+            <h3>No Subjects Found</h3>
+            <p>Visit the admin panel to create subject folders.</p>
+        </div>
         <?php else: ?>
-            <div class="folder-grid fade-in fade-in-2">
-                <?php foreach ($folders as $folder): ?>
-                    <a href="folder?id=<?= $folder['id'] ?>" style="text-decoration:none">
-                        <div class="neu-card folder-card" style="--folder-color:<?= e($folder['color']) ?>">
-                            <span class="folder-icon"><?= e($folder['icon']) ?></span>
-                            <span class="folder-name"><?= e($folder['name']) ?></span>
-                            <span class="folder-count"><?= $folder['file_count'] ?>
-                                note<?= $folder['file_count'] != 1 ? 's' : '' ?></span>
-                            <?php if ($folder['description']): ?>
-                                <p style="font-size:.78rem;color:var(--text-muted);margin-top:6px;line-height:1.4">
-                                    <?= e($folder['description']) ?>
-                                </p>
-                            <?php endif; ?>
-                            <div class="folder-accent-bar"></div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
+        <div class="folder-grid fade-in fade-in-2">
+            <?php foreach ($folders as $folder): ?>
+            <a href="folder?id=<?= $folder['id'] ?>" style="text-decoration:none">
+                <div class="neu-card folder-card" style="--folder-color:<?= e($folder['color']) ?>">
+                    <span class="folder-icon"><?= e($folder['icon']) ?></span>
+                    <span class="folder-name"><?= e($folder['name']) ?></span>
+                    <span class="folder-count"><?= $folder['file_count'] ?>
+                        note<?= $folder['file_count'] != 1 ? 's' : '' ?></span>
+                    <?php if ($folder['description']): ?>
+                    <p style="font-size:.78rem;color:var(--text-muted);margin-top:6px;line-height:1.4">
+                        <?= e($folder['description']) ?>
+                    </p>
+                    <?php endif; ?>
+                    <div class="folder-accent-bar"></div>
+                </div>
+            </a>
+            <?php endforeach; ?>
+        </div>
         <?php endif; ?>
     </div>
 
